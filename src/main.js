@@ -6,8 +6,12 @@ import App from './App.vue'
 import './style/base.less'
 //引入lib-flexible 会自动给不同的屏幕设置html的fontsize
 import 'lib-flexible'
+//引入路由
+import router from './router/router.js'
 //创建vue实例
 new Vue({
+  //挂载路由
+  router,
   //渲染的模板(组件)
   render: h => h(App),
 }).$mount('#app')

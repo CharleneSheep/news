@@ -1,10 +1,12 @@
 <template>
-  <h1>hello, my-cli</h1>
+  <div>
+    <!-- 出口 -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style>
-</style>
+<style></style>
