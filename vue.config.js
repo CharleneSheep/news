@@ -1,5 +1,3 @@
-const { modifyVars } = require('less')
-
 module.exports = {
   devServer: {
     //自动打开浏览器
@@ -12,7 +10,7 @@ module.exports = {
       postcss: {
         plugins: [
           require('postcss-px2rem')({
-            remUint: 37.5,
+            remUnit: 37.5,
           }),
         ],
       },

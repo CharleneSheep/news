@@ -8,7 +8,7 @@ import Register from '../pages/Register.vue'
 //使用路由
 Vue.use(VueRouter)
 //创建路由
-const router = new Vue({
+const router = new VueRouter({
   //规则
   routes: [
     {
