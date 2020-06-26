@@ -1,16 +1,22 @@
 <template>
   <div>
-    <div class="btn">
+    <div class="btn" @click="subUser">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    subUser() {
+      this.$emit('click')
+    },
+  },
+}
 </script>
 
-<style lang='less'>
+<style lang="less">
 .btn {
   height: 40px;
   background-color: #cc3300;

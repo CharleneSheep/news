@@ -10,6 +10,16 @@ import './font/iconfont.css'
 import 'lib-flexible'
 //引入路由
 import router from './router/router.js'
+//引入axios
+import axios from 'axios'
+//在vue的原型上面挂载axios方便整个项目的使用
+Vue.prototype.$axios = axios
+//设置基地址方便整个项目发送请求的时候不用写前面的那一串基地址
+axios.defaults.baseURL = 'http://localhost:3000'
+//引入vant的组件
+import { Toast } from 'vant'
+//vue全局安装toast
+Vue.use(Toast)
 //引入路由组件
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue'
