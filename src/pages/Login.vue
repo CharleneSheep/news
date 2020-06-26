@@ -25,6 +25,9 @@
     >
     <!-- 提交按钮 -->
     <news-button @click="subUser">登录</news-button>
+    <div class="goRegister">
+      还没账号,去<router-link to="/register">注册</router-link>
+    </div>
   </div>
 </template>
 
@@ -47,6 +50,7 @@ export default {
       this.password = password
     },
     subUser() {
+      /* 对用户名和密码进行正则校验 */
       //ref加在组件上获得的是组件实例可以使用组件上的所有方法。
       //再校验一次用户名和密码再发送axios请求
       if (
@@ -73,8 +77,13 @@ export default {
         })
     },
   },
-  /* 对用户名和密码进行正则校验 */
 }
 </script>
 
-<style></style>
+<style lang="less">
+.goRegister {
+  font-size: 12px;
+  text-align: right;
+  padding: 10px;
+}
+</style>
