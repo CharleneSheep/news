@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 头部组件 -->
-    <news-header>登录</news-header>
+    <news-header title="登录"></news-header>
     <!-- new字体图标 -->
     <news-new></news-new>
     <!-- 输入框 -->
@@ -12,8 +12,7 @@
       :user="username"
       @input="saveName"
       :rule="/^1\d{3,10}$/"
-      >用户名格式错误</news-input
-    >
+    >用户名格式错误</news-input>
     <news-input
       ref="password"
       type="password"
@@ -21,12 +20,12 @@
       :user="password"
       @input="savePassword"
       :rule="/^\d{3,6}$/"
-      >密码格式错误</news-input
-    >
+    >密码格式错误</news-input>
     <!-- 提交按钮 -->
     <news-button @click="subUser">登录</news-button>
     <div class="goRegister">
-      还没账号,去<router-link to="/register">注册</router-link>
+      还没账号,去
+      <router-link to="/register">注册</router-link>
     </div>
   </div>
 </template>
@@ -39,7 +38,7 @@ export default {
   data() {
     return {
       username: '',
-      password: '',
+      password: ''
     }
   },
   methods: {
@@ -63,20 +62,31 @@ export default {
       this.$axios
         .post('/login', {
           username: this.username,
-          password: this.password,
+          password: this.password
         })
         .then(res => {
           //查看返回结果的状态码给出对应sucess和fail样式的提示
-          if (res.data.status === 200) {
+          if (res.data.statusCode === 200) {
+            let token = res.data.data.token
+            let id = res.data.data.user.id
+            //存储token和用户id
+            localStorage.setItem('token', token)
+            localStorage.setItem('id', id)
             this.$toast.success(res.data.message)
             //跳转到个人中心页面并传递当前的用户id和token
-            // this.$router.push('/user')
+            this.$router.push({
+              name: 'user',
+              params: {
+                token,
+                id
+              }
+            })
           } else {
             this.$toast.fail(res.data.message)
           }
         })
-    },
-  },
+    }
+  }
 }
 </script>
 

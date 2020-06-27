@@ -4,17 +4,21 @@
       <i class="iconfont iconjiantou2"></i>
     </div>
     <div class="center">
-      <slot></slot>
+      {{ title }}
     </div>
     <div class="right"></div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    title: '',
+  },
+}
 </script>
 
-<style lang='less'>
+<style lang="less">
 .head {
   display: flex;
   height: 40px;

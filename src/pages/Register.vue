@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 头部组件 -->
-    <news-header>注册</news-header>
+    <news-header title="注册"></news-header>
     <!-- new字体图标 -->
     <news-new></news-new>
     <!-- 输入框 -->
