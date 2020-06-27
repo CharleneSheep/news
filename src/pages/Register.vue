@@ -79,7 +79,13 @@ export default {
           if (res.data.statusCode === 200) {
             this.$toast.success(res.data.message)
             //跳转到个人中心页面并传递当前的用户id和token
-            this.$router.push('/login')
+            this.$router.push({
+              name: 'login',
+              params: {
+                username: this.username,
+                password: this.password,
+              },
+            })
           } else {
             this.$toast.fail(res.data.message)
           }

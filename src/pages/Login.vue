@@ -12,7 +12,8 @@
       :user="username"
       @input="saveName"
       :rule="/^1\d{3,10}$/"
-    >用户名格式错误</news-input>
+      >用户名格式错误</news-input
+    >
     <news-input
       ref="password"
       type="password"
@@ -20,7 +21,8 @@
       :user="password"
       @input="savePassword"
       :rule="/^\d{3,6}$/"
-    >密码格式错误</news-input>
+      >密码格式错误</news-input
+    >
     <!-- 提交按钮 -->
     <news-button @click="subUser">登录</news-button>
     <div class="goRegister">
@@ -38,8 +40,13 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
     }
+  },
+  created() {
+    //获取注册传递过来的用户名和密码
+    this.username = this.$route.params.username
+    this.password = this.$route.params.password
   },
   methods: {
     saveName(name) {
@@ -62,7 +69,7 @@ export default {
       this.$axios
         .post('/login', {
           username: this.username,
-          password: this.password
+          password: this.password,
         })
         .then(res => {
           //查看返回结果的状态码给出对应sucess和fail样式的提示
@@ -78,15 +85,15 @@ export default {
               name: 'user',
               params: {
                 token,
-                id
-              }
+                id,
+              },
             })
           } else {
             this.$toast.fail(res.data.message)
           }
         })
-    }
-  }
+    },
+  },
 }
 </script>
 

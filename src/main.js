@@ -25,7 +25,6 @@ axios.defaults.baseURL = 'http://localhost:3000'
 //axios响应拦截
 axios.interceptors.response.use(res => {
   //状态码未401的时候提示token过期并移除localStorage的id和token
-  console.log(res)
   let message = res.data.message
   let statusCode = res.data.statusCode
   if (message == '用户信息验证失败' && statusCode === 401) {
