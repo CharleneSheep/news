@@ -5,7 +5,7 @@
     <!-- new字体图标 -->
     <news-new></news-new>
     <!-- 输入框 -->
-    <news-input
+    <!-- <news-input
       ref="username"
       type="text"
       placeholder="用户名 / 手机号码"
@@ -13,16 +13,29 @@
       @input="saveName"
       :rule="/^1\d{3,10}$/"
       >用户名格式错误</news-input
-    >
+    >-->
     <news-input
+      ref="username"
+      type="text"
+      placeholder="用户名 / 手机号码"
+      v-model="username"
+      :rule="/^1\d{3,10}$/"
+    >用户名格式错误</news-input>
+    <!-- <news-input
       ref="password"
       type="password"
       placeholder="密码"
       :user="password"
       @input="savePassword"
       :rule="/^\d{3,6}$/"
-      >密码格式错误</news-input
-    >
+    >密码格式错误</news-input>-->
+    <news-input
+      ref="password"
+      type="password"
+      placeholder="密码"
+      v-model="password"
+      :rule="/^\d{3,6}$/"
+    >密码格式错误</news-input>
     <!-- 提交按钮 -->
     <news-button @click="subUser">登录</news-button>
     <div class="goRegister">
@@ -40,7 +53,7 @@ export default {
   data() {
     return {
       username: '',
-      password: '',
+      password: ''
     }
   },
   created() {
@@ -49,12 +62,12 @@ export default {
     this.password = this.$route.params.password
   },
   methods: {
-    saveName(name) {
-      this.username = name
-    },
-    savePassword(password) {
-      this.password = password
-    },
+    // saveName(name) {
+    //   this.username = name
+    // },
+    // savePassword(password) {
+    //   this.password = password
+    // },
     subUser() {
       /* 对用户名和密码进行正则校验 */
       //ref加在组件上获得的是组件实例可以使用组件上的所有方法。
@@ -69,7 +82,7 @@ export default {
       this.$axios
         .post('/login', {
           username: this.username,
-          password: this.password,
+          password: this.password
         })
         .then(res => {
           //查看返回结果的状态码给出对应sucess和fail样式的提示
@@ -80,20 +93,16 @@ export default {
             localStorage.setItem('token', token)
             localStorage.setItem('id', id)
             this.$toast.success(res.data.message)
-            //跳转到个人中心页面并传递当前的用户id和token
+            //跳转到个人中心页面
             this.$router.push({
-              name: 'user',
-              params: {
-                token,
-                id,
-              },
+              name: 'user'
             })
           } else {
             this.$toast.fail(res.data.message)
           }
         })
-    },
-  },
+    }
+  }
 }
 </script>
 

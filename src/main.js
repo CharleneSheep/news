@@ -15,9 +15,10 @@ import axios from 'axios'
 //引入moment
 import moment from 'moment'
 //引入vant的组件
-import { Toast } from 'vant'
+import { Toast, Dialog } from 'vant'
 //vue全局安装toast
 Vue.use(Toast)
+Vue.use(Dialog)
 //在vue的原型上面挂载axios方便整个项目的使用
 Vue.prototype.$axios = axios
 //设置基地址方便整个项目发送请求的时候不用写前面的那一串基地址

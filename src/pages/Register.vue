@@ -9,29 +9,23 @@
       type="text"
       ref="username"
       placeholder="用户名 / 手机号码"
-      :user="username"
-      @input="saveName"
+      v-model="username"
       :rule="/^1\d{3,10}$/"
-      >用户名错误</news-input
-    >
+    >用户名错误</news-input>
     <news-input
       type="text"
       ref="nickname"
       placeholder="昵称"
-      @input="savaNick"
-      :user="nickname"
+      v-model="nickname"
       :rule="/^[\u4e00-\u9fa5]{2,8}$/"
-      >用户名错误</news-input
-    >
+    >用户名错误</news-input>
     <news-input
       type="password"
       ref="password"
-      @input="savePassword"
+      v-model="password"
       placeholder="密码"
-      :user="password"
       :rule="/^\d{3,6}$/"
-      >密码错误</news-input
-    >
+    >密码错误</news-input>
     <!-- 提交按钮 -->
     <news-button @click="subUser">注册</news-button>
   </div>
@@ -43,7 +37,7 @@ export default {
     return {
       username: '',
       nickname: '',
-      password: '',
+      password: ''
     }
   },
   methods: {
@@ -72,7 +66,7 @@ export default {
         .post('/register', {
           username: this.username,
           nickname: this.nickname,
-          password: this.password,
+          password: this.password
         })
         .then(res => {
           //查看返回结果的状态码给出对应sucess和fail样式的提示
@@ -83,15 +77,15 @@ export default {
               name: 'login',
               params: {
                 username: this.username,
-                password: this.password,
-              },
+                password: this.password
+              }
             })
           } else {
             this.$toast.fail(res.data.message)
           }
         })
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -9,7 +9,7 @@
         :type="type"
         :placeholder="placeholder"
         @input="fn"
-        :value="user"
+        :value="value"
       />
       <div class="tip" v-show="userResult === 'fail'">
         <slot></slot>
@@ -22,14 +22,14 @@
 export default {
   data() {
     return {
-      userResult: '',
+      userResult: ''
     }
   },
   props: {
     type: String,
     placeholder: String,
-    user: String,
-    rule: RegExp,
+    value: String,
+    rule: RegExp
   },
   methods: {
     fn(e) {
@@ -48,8 +48,8 @@ export default {
           return false
         }
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

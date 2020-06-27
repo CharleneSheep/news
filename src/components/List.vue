@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="list" @click="logout">
     <div class="left">{{title}}</div>
     <div class="center">{{content}}</div>
     <div class="right">
@@ -17,6 +17,11 @@ export default {
     },
     content: {
       type: String
+    }
+  },
+  methods: {
+    logout() {
+      this.$emit('click')
     }
   }
 }
