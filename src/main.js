@@ -15,10 +15,25 @@ import axios from 'axios'
 //引入moment
 import moment from 'moment'
 //引入vant的组件
-import { Toast, Dialog } from 'vant'
+import {
+  Toast,
+  Dialog,
+  Field,
+  Cell,
+  CellGroup,
+  Radio,
+  RadioGroup,
+  Uploader,
+} from 'vant'
 //vue全局安装toast
 Vue.use(Toast)
 Vue.use(Dialog)
+Vue.use(Field)
+Vue.use(Cell)
+Vue.use(CellGroup)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Uploader)
 //在vue的原型上面挂载axios方便整个项目的使用
 Vue.prototype.$axios = axios
 //设置基地址方便整个项目发送请求的时候不用写前面的那一串基地址
@@ -42,6 +57,7 @@ axios.interceptors.response.use(res => {
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue'
 import User from './pages/User.vue'
+import Edit from './pages/Edit.vue'
 
 import Header from './components/Header.vue'
 import New from './components/New.vue'
@@ -59,6 +75,7 @@ Vue.component('news-input', Input)
 Vue.component('news-button', Button)
 Vue.component('news-info', Info)
 Vue.component('news-list', List)
+Vue.component('news-edit', Edit)
 //全局过滤器  格式化时间
 Vue.filter('dateFilter', (res, type = 'YYYY-MM-DD') => {
   return moment(res).format(type)

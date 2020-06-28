@@ -6,6 +6,7 @@ import VueRouter from 'vue-router'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import User from '../pages/User.vue'
+import Edit from '../pages/Edit.vue'
 //引入vant的组件
 import { Toast } from 'vant'
 
@@ -33,6 +34,11 @@ const router = new VueRouter({
       path: '/user',
       name: 'user',
       component: User,
+    },
+    {
+      path: '/edit',
+      name: 'edit',
+      component: Edit,
     },
   ],
 })

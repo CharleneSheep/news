@@ -1,11 +1,9 @@
 <template>
   <div class="head">
-    <div class="left">
+    <div class="left" @click="back">
       <i class="iconfont iconjiantou2"></i>
     </div>
-    <div class="center">
-      {{ title }}
-    </div>
+    <div class="center">{{ title }}</div>
     <div class="right"></div>
   </div>
 </template>
@@ -13,12 +11,17 @@
 <script>
 export default {
   props: {
-    title: '',
+    title: ''
   },
+  methods: {
+    back() {
+      this.$router.back()
+    }
+  }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .head {
   display: flex;
   height: 40px;

@@ -2,7 +2,7 @@
   <div class="info">
     <div class="left">
       <!-- <img :src="'http://localhost:3000' + user.head_img" alt /> -->
-      <img :src="'http://localhost:3000' + user.head_img" alt />
+      <img :src="$axios.defaults.baseURL + user.head_img" alt />
     </div>
     <div class="center">
       <!-- 昵称 -->
@@ -23,7 +23,7 @@
 <script>
 export default {
   //接收User页面传递过来的用户信息(对象)
-  props: ['user'],
+  props: ['user']
 }
 </script>
 
@@ -36,9 +36,10 @@ export default {
     flex: 3;
     text-align: center;
     img {
-      width: 100%;
-      height: 100%;
+      width: 80%;
+      height: 80%;
       border-radius: 50%;
+      margin-top: 10%;
     }
   }
   .center {

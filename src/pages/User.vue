@@ -5,7 +5,7 @@
     <news-list title="我的关注" content="关注的用户"></news-list>
     <news-list title="我的跟帖" content="跟帖/回复"></news-list>
     <news-list title="我的收藏" content="文章/视频"></news-list>
-    <news-list title="设置"></news-list>
+    <news-list title="设置" @click="$router.push('/edit')"></news-list>
     <news-list title="退出" @click="logout"></news-list>
   </div>
 </template>
