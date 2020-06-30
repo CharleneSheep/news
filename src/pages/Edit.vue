@@ -4,7 +4,7 @@
     <div class="user_head">
       <img :src="$axios.defaults.baseURL + user.head_img" alt />
       <!-- 修改头像 -->
-      <van-uploader :after-read="afterRead" />
+      <van-uploader :before-read="beforeRead" :after-read="afterRead" />
     </div>
 
     <news-list title="昵称" :content="user.nickname" @click="showNickname"></news-list>
@@ -51,24 +51,31 @@ export default {
     this.getUser()
   },
   methods: {
+    //在预览图片之前先校验图片的格式和大小
+    beforeRead(file) {
+      if (file.type != 'image/jpeg' && file.type != 'image/png') {
+        this.$toast('文件格式不正确')
+        return false
+        //除以1024之后的kb大小不超过500
+      } else if (file.size / 1024 > 500) {
+        this.$toast('文件大小不超过500kb哦')
+        //返回false不继续
+        return false
+      }
+      return true
+    },
     afterRead(file) {
       let id = localStorage.getItem('id')
       let token = localStorage.getItem('token')
       let formdate = new FormData()
       formdate.append('file', file.file)
       //上传图片
-      this.$axios
-        .post('/upload', formdate, {
-          headers: {
-            Authorization: token
-          }
-        })
-        .then(res => {
-          let data = {
-            head_img: res.data.data.url
-          }
-          this.editUser(data)
-        })
+      this.$axios.post('/upload', formdate).then(res => {
+        let data = {
+          head_img: res.data.data.url
+        }
+        this.editUser(data)
+      })
       //上传用户信息
     },
     getUser() {
@@ -76,15 +83,9 @@ export default {
       let id = localStorage.getItem('id')
       let token = localStorage.getItem('token')
       //发送axios请求获取完整的用户信息
-      this.$axios
-        .get(`/user/${id}`, {
-          headers: {
-            Authorization: token
-          }
-        })
-        .then(res => {
-          this.user = res.data.data
-        })
+      this.$axios.get(`/user/${id}`).then(res => {
+        this.user = res.data.data
+      })
     },
     showNickname() {
       this.nickname_show = true
@@ -95,6 +96,8 @@ export default {
       this.gender = this.user.gender
     },
     sureNickname() {
+      //判断是否未修改,是的话则不发送编辑请求
+      if (this.nickname === this.user.nickname) return
       let data = {
         nickname: this.nickname
       }
@@ -104,18 +107,13 @@ export default {
       //获取本地存储的id和token
       let id = localStorage.getItem('id')
       let token = localStorage.getItem('token')
-      this.$axios
-        .post(`/user_update/${id}`, data, {
-          headers: {
-            Authorization: token
-          }
-        })
-        .then(res => {
-          this.$toast.success(res.data.message)
-          this.getUser()
-        })
+      this.$axios.post(`/user_update/${id}`, data).then(res => {
+        this.$toast.success(res.data.message)
+        this.getUser()
+      })
     },
     sureGender() {
+      if (this.gender === this.user.gender) return
       let data = {
         gender: this.gender
       }

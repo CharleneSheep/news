@@ -7,6 +7,8 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import User from '../pages/User.vue'
 import Edit from '../pages/Edit.vue'
+import Focus from '../pages/Focus.vue'
+import Comments from '../pages/Comments.vue'
 //引入vant的组件
 import { Toast } from 'vant'
 
@@ -39,6 +41,16 @@ const router = new VueRouter({
       path: '/edit',
       name: 'edit',
       component: Edit,
+    },
+    {
+      path: '/focus',
+      name: 'focus',
+      component: Focus,
+    },
+    {
+      path: '/comments',
+      name: 'comments',
+      component: Comments,
     },
   ],
 })

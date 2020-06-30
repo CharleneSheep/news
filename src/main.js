@@ -24,6 +24,7 @@ import {
   Radio,
   RadioGroup,
   Uploader,
+  List,
 } from 'vant'
 //vue全局安装toast
 Vue.use(Toast)
@@ -34,6 +35,7 @@ Vue.use(CellGroup)
 Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Uploader)
+Vue.use(List)
 //在vue的原型上面挂载axios方便整个项目的使用
 Vue.prototype.$axios = axios
 //设置基地址方便整个项目发送请求的时候不用写前面的那一串基地址
@@ -52,19 +54,32 @@ axios.interceptors.response.use(res => {
   }
   return res
 })
-
+//axios请求拦截
+axios.interceptors.request.use(config => {
+  let token = localStorage.getItem('token')
+  //判断是否存在token
+  if (token) {
+    //给配置的请求头中的Authorization赋值token
+    config.headers.Authorization = token
+  }
+  return config
+})
 //引入路由组件
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue'
 import User from './pages/User.vue'
 import Edit from './pages/Edit.vue'
+import Focus from './pages/Focus.vue'
+import Comments from './pages/Comments.vue'
 
 import Header from './components/Header.vue'
 import New from './components/New.vue'
 import Input from './components/Input.vue'
 import Button from './components/Button.vue'
 import Info from './components/Info.vue'
-import List from './components/List.vue'
+import MyList from './components/List.vue'
+import FocusUser from './components/FocusUser.vue'
+
 //创建全局组件
 Vue.component('news-login', Login)
 Vue.component('news-register', Register)
@@ -74,8 +89,11 @@ Vue.component('news-new', New)
 Vue.component('news-input', Input)
 Vue.component('news-button', Button)
 Vue.component('news-info', Info)
-Vue.component('news-list', List)
+Vue.component('news-list', MyList)
 Vue.component('news-edit', Edit)
+Vue.component('news-focus', Focus)
+Vue.component('news-focusUser', FocusUser)
+Vue.component('news-comments', Comments)
 //全局过滤器  格式化时间
 Vue.filter('dateFilter', (res, type = 'YYYY-MM-DD') => {
   return moment(res).format(type)
