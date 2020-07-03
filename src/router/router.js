@@ -9,6 +9,8 @@ import User from '../pages/User.vue'
 import Edit from '../pages/Edit.vue'
 import Focus from '../pages/Focus.vue'
 import Comments from '../pages/Comments.vue'
+import Star from '../pages/Star.vue'
+import Home from '../pages/Home.vue'
 //引入vant的组件
 import { Toast } from 'vant'
 
@@ -51,6 +53,16 @@ const router = new VueRouter({
       path: '/comments',
       name: 'comments',
       component: Comments,
+    },
+    {
+      path: '/star',
+      name: 'star',
+      component: Star,
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home,
     },
   ],
 })

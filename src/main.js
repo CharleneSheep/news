@@ -71,6 +71,8 @@ import User from './pages/User.vue'
 import Edit from './pages/Edit.vue'
 import Focus from './pages/Focus.vue'
 import Comments from './pages/Comments.vue'
+import Star from './pages/Star.vue'
+import Home from './pages/Home.vue'
 
 import Header from './components/Header.vue'
 import New from './components/New.vue'
@@ -79,6 +81,7 @@ import Button from './components/Button.vue'
 import Info from './components/Info.vue'
 import MyList from './components/List.vue'
 import FocusUser from './components/FocusUser.vue'
+import Content from './components/Content.vue'
 
 //创建全局组件
 Vue.component('news-login', Login)
@@ -94,6 +97,9 @@ Vue.component('news-edit', Edit)
 Vue.component('news-focus', Focus)
 Vue.component('news-focusUser', FocusUser)
 Vue.component('news-comments', Comments)
+Vue.component('news-star', Star)
+Vue.component('news-content', Content)
+Vue.component('news-home', Home)
 //全局过滤器  格式化时间
 Vue.filter('dateFilter', (res, type = 'YYYY-MM-DD') => {
   return moment(res).format(type)

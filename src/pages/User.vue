@@ -2,9 +2,10 @@
   <div>
     <news-header title="个人中心"></news-header>
     <news-info :user="user"></news-info>
+    <news-list title="主页" @click="$router.push('/home')"></news-list>
     <news-list title="我的关注" content="关注的用户" @click="$router.push('/focus')"></news-list>
     <news-list title="我的跟帖" content="跟帖/回复" @click="$router.push('/comments')"></news-list>
-    <news-list title="我的收藏" content="文章/视频"></news-list>
+    <news-list title="我的收藏" content="文章/视频" @click="$router.push('/star')"></news-list>
     <news-list title="设置" @click="$router.push('/edit')"></news-list>
     <news-list title="退出" @click="logout"></news-list>
   </div>
@@ -32,24 +33,20 @@ export default {
     }
   },
   methods: {
-    logout() {
-      //先询问是否真的要退出(使用Dialog)
-      this.$dialog
-        .confirm({
+    async logout() {
+      try {
+        //先询问是否真的要退出(使用Dialog)
+        await this.$dialog.confirm({
           title: '温馨提示',
           message: '您真的要退出账号吗?'
         })
-        .then(() => {
-          // on confirm
-          //清除本地的token和id
-          localStorage.removeItem('token')
-          localStorage.removeItem('id')
-          //跳转到登陆页面
-          this.$router.push('/login')
-        })
-        .catch(() => {
-          // on cancel
-        })
+        // on confirm
+        //清除本地的token和id
+        localStorage.removeItem('token')
+        localStorage.removeItem('id')
+        //跳转到登陆页面
+        this.$router.push('/login')
+      } catch (error) {}
     }
   }
 }
