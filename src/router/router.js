@@ -10,7 +10,8 @@ import Edit from '../pages/Edit.vue'
 import Focus from '../pages/Focus.vue'
 import Comments from '../pages/Comments.vue'
 import Star from '../pages/Star.vue'
-import Home from '../pages/Home.vue'
+import Index from '../pages/Index.vue'
+import Post from '../pages/Post.vue'
 //引入vant的组件
 import { Toast } from 'vant'
 
@@ -60,9 +61,14 @@ const router = new VueRouter({
       component: Star,
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Home,
+      path: '/index',
+      name: 'index',
+      component: Index,
+    },
+    {
+      path: '/post/:id',
+      name: 'post',
+      component: Post,
     },
   ],
 })
@@ -72,11 +78,11 @@ const router = new VueRouter({
   next('/路径')相当于重定向 跳转到
 */
 router.beforeEach((to, from, next) => {
-  //获取本地存储
+  let arr = ['login', 'register', 'index', 'post']
+  //获取本地存储token 判断用户是否登录
   let token = localStorage.getItem('token')
-  // let id = localStorage.getItem('id')
-  //判断是否去除了login和register页面的其它页面
-  if (to.name === 'login' || to.name === 'register') {
+  //判断是否去除了login和register页面...的其它页面
+  if (arr.includes(to.name)) {
     next()
   } else {
     //判断是否登录

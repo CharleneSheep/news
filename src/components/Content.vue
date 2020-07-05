@@ -4,12 +4,12 @@
     <div class="video" v-if="item.type===2">
       <div class="title">{{item.title}}</div>
       <div class="myvideo">
-        <img :src="item.cover[0].url" alt />
+        <img :src="filterUrl(item.cover[0].url)" alt />
         <i class="iconfont iconshipin"></i>
       </div>
       <div class="author">
         {{item.user.nickname}}
-        <div class="count">{{item.comments.length}}跟帖</div>
+        <div class="count">{{item.comments?item.comments.length:item.comment_length}}跟帖</div>
       </div>
     </div>
     <!-- 单张照片 -->
@@ -18,24 +18,24 @@
         <div class="title">{{item.title}}</div>
         <div class="author">
           {{item.user.nickname}}
-          <div class="count">{{item.comments.length}}跟帖</div>
+          <div class="count">{{item.comments?item.comments.length:item.comment_length}}跟帖</div>
         </div>
       </div>
       <div class="right">
-        <img :src="item.cover[0].url" alt />
+        <img :src="filterUrl(item.cover[0].url)" alt />
       </div>
     </div>
     <!-- 多张照片 -->
     <div class="multi-img" v-else>
       <div class="title">{{item.title}}</div>
       <div class="imgs">
-        <img :src="item.cover[0].url" alt />
-        <img :src="item.cover[1].url" alt />
-        <img :src="item.cover[2].url" alt />
+        <img :src="filterUrl(item.cover[0].url)" alt />
+        <img :src="filterUrl(item.cover[1].url)" alt />
+        <img :src="filterUrl(item.cover[2].url)" alt />
       </div>
       <div class="author">
         {{item.user.nickname}}
-        <div class="count">{{item.comments.length}}跟帖</div>
+        <div class="count">{{item.comments?item.comments.length:item.comment_length}}跟帖</div>
       </div>
     </div>
   </div>
@@ -46,8 +46,15 @@ export default {
   props: {
     item: Object
   },
-  created() {
-    console.log(this.item)
+  methods: {
+    filterUrl(url) {
+      //判断url是否以http开头
+      if (url.startsWith('http')) {
+        return url
+      } else {
+        return this.$axios.defaults.baseURL + url
+      }
+    }
   }
 }
 </script>
@@ -66,6 +73,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      text-align: left;
       margin-right: 5px;
       .title {
         font-size: 16px;
@@ -89,7 +97,7 @@ export default {
   }
   /* 多张图片 */
   .multi-img {
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ccc;
     .title {

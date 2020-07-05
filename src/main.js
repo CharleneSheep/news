@@ -25,6 +25,9 @@ import {
   RadioGroup,
   Uploader,
   List,
+  Tab,
+  Tabs,
+  PullRefresh,
 } from 'vant'
 //vue全局安装toast
 Vue.use(Toast)
@@ -36,6 +39,9 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Uploader)
 Vue.use(List)
+Vue.use(Tab)
+Vue.use(Tabs)
+Vue.use(PullRefresh)
 //在vue的原型上面挂载axios方便整个项目的使用
 Vue.prototype.$axios = axios
 //设置基地址方便整个项目发送请求的时候不用写前面的那一串基地址
@@ -72,7 +78,8 @@ import Edit from './pages/Edit.vue'
 import Focus from './pages/Focus.vue'
 import Comments from './pages/Comments.vue'
 import Star from './pages/Star.vue'
-import Home from './pages/Home.vue'
+import Index from './pages/Index.vue'
+import Post from './pages/Post.vue'
 
 import Header from './components/Header.vue'
 import New from './components/New.vue'
@@ -99,7 +106,8 @@ Vue.component('news-focusUser', FocusUser)
 Vue.component('news-comments', Comments)
 Vue.component('news-star', Star)
 Vue.component('news-content', Content)
-Vue.component('news-home', Home)
+Vue.component('news-index', Index)
+Vue.component('news-post', Post)
 //全局过滤器  格式化时间
 Vue.filter('dateFilter', (res, type = 'YYYY-MM-DD') => {
   return moment(res).format(type)
